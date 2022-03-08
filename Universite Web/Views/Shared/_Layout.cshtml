@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model VmLayout
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -79,7 +80,7 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li>
                                 <a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#myModal"
-                                   href="login-student.html">
+                                   asp-area="Universite_Web"   asp-controller="LoginStudent" asp-action="login">
                                     Tələbə üçün giriş
                                 </a>
                             </li>
@@ -237,19 +238,22 @@
                             <div class="container">
                                 <div class="row justify-content-around">
                                     <div class="col-md-8">
-                                        <h3 class="modal-title ">Giris</h3>
-                                        <div class="mb-">
-                                            <label for="exampleInputEmail1" class="form-label">ID</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">Parol</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1">
-                                        </div>
-                                        <div class="text-center">
-                                            <button type="submit" class="btn btn-primary">Daxil ol</button>
+                                        <form class="user" asp-area="Universite_Web" asp-controller="LoginStudent" asp-action="login">
+                                            <div asp-validation-summary="All" class="text-danger"></div>
+                                            <h3 class="modal-title ">Giris</h3>
+                                            <div class="mb-">
+                                                <label for="exampleInputEmail1" class="form-label">ID</label>
+                                                <input class="form-control" type="email" asp-for="@Model.VmStudentLogin.Email" aria-describedby="emailHelp">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleInputPassword1" class="form-label">Parol</label>
+                                                <input type="password" asp-for="@Model.VmStudentLogin.Password" class="form-control" id="exampleInputPassword1">
+                                            </div>
+                                            <div class="text-center">
+                                                <button type="submit" class="btn btn-primary">Daxil ol</button>
 
-                                        </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

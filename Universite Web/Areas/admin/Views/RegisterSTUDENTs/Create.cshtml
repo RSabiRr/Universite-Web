@@ -1,0 +1,192 @@
+﻿@model VmStudentRegister
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>RegisterSTUDENT</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Surname" class="control-label"></label>
+                <input asp-for="Surname" class="form-control" />
+                <span asp-validation-for="Surname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="@Model.RegisterSTUDENT.AtaAdi" class="control-label"></label>
+                <input asp-for="@Model.RegisterSTUDENT.AtaAdi" class="form-control" />
+                <span asp-validation-for="@Model.RegisterSTUDENT.AtaAdi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.RegisterSTUDENT.PassportNumber" class="control-label"></label>
+                <input asp-for="@Model.RegisterSTUDENT.PassportNumber" class="form-control" />
+                <span asp-validation-for="@Model.RegisterSTUDENT.PassportNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.RegisterSTUDENT.Gender" class="control-label"></label>
+                <select asp-for="@Model.RegisterSTUDENT.Gender" class="form-control">
+                    <option value="kisi">Kisi</option>
+                    <option value="qadin">Qadin</option>
+                </select>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="Money" class="control-label"></label>
+                <select asp-for="Money" class="form-control">
+                    <option value="free">Ödənişli</option>
+                    <option value="Paid">Dövlət Hesabına</option>
+                </select>
+                <span asp-validation-for="Money" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Adress" class="control-label"></label>
+                <input asp-for="Adress" class="form-control" />
+                <span asp-validation-for="Adress" class="text-danger"></span>
+            </div>*@
+            @*<div class="form-group">
+                <label asp-for="FormEducation" class="control-label"></label>
+                <input asp-for="FormEducation" class="form-control" />
+                <span asp-validation-for="FormEducation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfBirth" class="control-label"></label>
+                <input asp-for="DateOfBirth" type="date" class="form-control" />
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AdmissionDate" class="control-label"></label>
+                <input asp-for="AdmissionDate" type="date" class="form-control" />
+                <span asp-validation-for="AdmissionDate" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="@Model.RegisterSTUDENT.DateOfCompletion" class="control-label"></label>
+                <input asp-for="@Model.RegisterSTUDENT.DateOfCompletion" type="date" class="form-control" />
+                <span asp-validation-for="@Model.RegisterSTUDENT.DateOfCompletion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.RegisterSTUDENT.FacultyId" class="control-label"></label>
+                <select asp-for="@Model.RegisterSTUDENT.FacultyId" id="CountryList" class="form-control" asp-items="ViewBag.FacultyId">
+                    <option value="0">Select</option>
+
+                </select>  
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.RegisterSTUDENT.SpecialtyId" class="control-label"></label>
+                <select asp-for="@Model.RegisterSTUDENT.SpecialtyId" id="StateList"  class="form-control"  asp-items="ViewBag.SpecialtyId ">
+                </select>
+            </div>
+             
+            
+
+            <div class="form-group">
+                <label asp-for="@Model.RegisterSTUDENT.EducationSectionId" class="control-label"></label>
+                <select asp-for="@Model.RegisterSTUDENT.EducationSectionId" class="form-control" asp-items="ViewBag.EducationSectionId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+            $('#CountryList').change ( function () {
+                var url = '@Url.Content("~/")' + "/RegisterSTUDENTs/GetState";
+                var country = '#CountryList';
+                console.log(country);
+                $.getJSON(url, { id: $(country).val() }, function (data) {
+                    var items = '';
+                    $('#StateList').empty();
+                    $.each(data, function (i, row) {
+                        items += "< option value = '" + row.value + "'>" + row.text + "</option >";
+
+                    });
+
+                    $("#StateList").html(items);
+                });
+            });
+        });
+
+
+            //$('#CountryList').on("change", function () {
+            //    $.ajax({
+            //        type: "Post",
+            //        url: "/RegisterSTUDENTs/GetState",
+            //        data: { id : $("#CountryList").val()  },
+            //        success: function (response) {
+            //            var items = '';
+            //            $(response).each(function ( ) {
+            //                items += "<option value =" + this.value + ">" + this.text + "</option>";
+            //            })
+            //            $("#StateList").html(items);
+            //        },
+            //        failure: function (response) {
+            //            alert(response.responseText);
+            //        },
+            //        error: function (response) {
+            //            alert(response.responseText);
+            //        }
+
+            //    });
+            //})
+        });
+</script>
+   
+         
+
+@*<script>
+    $(document).ready(function () {
+        $(function () {
+            $('#faculty').change(function () {
+                $('#specialty').empty();
+                $.ajax({
+                    type: "GET",
+                    url: '/RegisterSTUDENTs/SpecialtySelect',
+                    dataType: "json",
+                    data: { id: $("#faculty").val() },
+                });
+
+                success: function(specialtyy) {
+                    $('#specialty').append('<option value=" ' + -1 + '">' +
+                        "Select" + '</option>');
+
+                    $.each(specialtyy, function (i, specialty) {
+                        $('#specialty').append('<option value=" ' + specialty.value + '">' +
+                            specialty.text + '</option>');
+                    });
+                }
+
+            });
+        });
+    });
+</script>*@

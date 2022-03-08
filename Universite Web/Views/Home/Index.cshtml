@@ -5,12 +5,14 @@
 
 <section id="slider">
     <div class="owl-carousel owl-theme">
-        <div class="item">
-            <img src="img/banner (1).jpg" class="img-fluid" alt="...">
-        </div>
+        
 
-        <div class="item"><img src="/img/york-university-hero-image_1140x600.jpg" class="img-fluid" alt="..."></div>
-        <div class="item"><img src="/img/york-university-hero-image_1140x600.jpg" class="img-fluid" alt="..."></div>
+        @*@foreach (var item in Model)
+        {
+            <div class="item"><img src="~/Uploads/@item.Image" class="img-fluid" alt="..."></div>
+        }*@
+
+       @* <div class="item"><img src="/img/york-university-hero-image_1140x600.jpg" class="img-fluid" alt="..."></div>*@
         <!-- <div class="item">      <img src="/img/20190828_FirstDay_NingLeng-_McCourt-45110optimized-2000x1500-c-default.jpg" class=" " alt="..."></div> -->
 
     </div>
